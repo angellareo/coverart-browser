@@ -1234,19 +1234,20 @@ class PanedCollapsible(Gtk.Paned):
             if ((current_pos - self.collapsible_y) < self.Min_Paned_Size):
                 self.expand(PanedCollapsible.Paned.COLLAPSE)
 
-        if self._from_paned_handle == 2:
-            # we are dealing with a double click situation
+        # if self._from_paned_handle == 2: 
+        #     # we are dealing with a double click situation
 
-            if self._expander.get_expanded():
-                # if we are in an expanded position - lets collapse the pane
-                print("collapsing")
-                self.expand(PanedCollapsible.Paned.COLLAPSE)
-            else:
-                # the current paned position is closed, so lets open the pane fully
-                self.expand(PanedCollapsible.Paned.EXPAND)
-                print("expanding")
-                self.set_position(0)
-        print(self.get_position())
+        # to do: collapse/expand depending on pref (CoverLocale singleton)
+        #        By now, I prevent from changes by commenting all the logic
+        #     if self._expander.get_expanded():
+        #         # if we are in an expanded position - lets collapse the pane
+        #         print("collapsing")
+        #         self.expand(PanedCollapsible.Paned.COLLAPSE)
+        #     else:
+        #         # the current paned position is closed, so lets open the pane fully
+        #         self.expand(PanedCollapsible.Paned.EXPAND)
+        #         print("expanding")
+        #         self.set_position(0)
         self._from_paned_handle = 0
 
     def do_remove(self, widget):
@@ -1323,9 +1324,10 @@ class PanedCollapsible(Gtk.Paned):
         self._expander.connect('notify::expanded',
                                self._on_collapsible_expanded)
 
+        ## Removed initial collapse
         # connect the initial collapse
-        self._allocate_id = self._expander.connect('size-allocate',
-                                                   self._initial_collapse)
+        # self._allocate_id = self._expander.connect('size-allocate',
+        #                                            self._initial_collapse)
 
         return self._expander
 
