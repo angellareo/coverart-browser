@@ -1778,6 +1778,7 @@ class TextManager(GObject.Object):
         '''
         # we use unicode to avoid problems with non ascii albums
         name = rb3compat.unicodestr(album.name, 'utf-8')
+        year = rb3compat.unicodestr(album.year, 'utf-8')
         artist = rb3compat.unicodestr(album.artist, 'utf-8')
 
         if self.display_text_ellipsize_enabled:
@@ -1797,8 +1798,8 @@ class TextManager(GObject.Object):
         name = GLib.markup_escape_text(name)
 
         # markup format
-        markup = "<span font='%d'><b>%s</b>\n<i>%s</i></span>"
-        return markup % (self.display_font_size, name, artist)
+        markup = "<span font='%d'><b>%s</b> (%s)\n<i>%s</i></span>"
+        return markup % (self.display_font_size, name, year, artist)
 
 
 class AlbumManager(GObject.Object):
